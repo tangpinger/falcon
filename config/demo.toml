@@ -1,0 +1,42 @@
+[exchange]
+    name = "binance"
+    api = "api.binance.com"
+    api_key = "your-api-key"
+    secret_key = "your-secret-key"
+
+# policy info
+[policy]
+    name = "high-freq-small-profit-001"
+    testnet = false
+    dryrun = false
+    # symbols = ["ADAUSDT", "ATOMUSDT", "BATUSDT", "BTTUSDT", "DASHUSDT", "DOGEUSDT", 
+    # "EOSUSDT", "ETCUSDT", "ICXUSDT", "IOTAUSDT", "NEOUSDT", "OMGUSDT", "ONTUSDT", "QTUMUSDT", 
+    # "TRXUSDT", "VETUSDT", "XLMUSDT", "XMRUSDT"]
+
+    symbols = ["ADAUSDT", "ATOMUSDT", "UNIUSDT", "XRPUSDT", "MATICUSDT", 
+    "DOTUSDT", "ETCUSDT", "CRVUSDT", "LINKUSDT", "DOGEUSDT"]
+
+    [policy.sample]
+        interval = "1m"
+        window = "5m"
+        slide_detect = true
+    # 定义24h交易额的范围，主要关注小币种，单位为万。
+    [policy.condition] 
+        min = 200
+        max = 1000
+    # 定义触发交易的阈值    
+    [policy.trigger]
+        sell_threshold = 0.6
+        buy_threshold = 0.3
+    # 定义交易费用，止盈止损点和仓位
+    [policy.trade]
+        one_by_one = false
+        fee = 0.002
+        stop_loss = 0.02
+        stop_profit = 0.008
+        position = 1.0 # FULL
+        usdt_per_buy = 12.0
+        max_usdt_per_buy = 20.0
+
+# common resources
+[res]
