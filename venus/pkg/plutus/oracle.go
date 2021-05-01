@@ -16,6 +16,7 @@ type Oracle struct {
 	symbols        []string
 	buy_threshold  float64
 	sell_threshold float64
+	chase_up	   bool
 	epochMap       map[string]*model.Epoch
 	tick           uint64
 	tickCount      uint64
@@ -28,6 +29,7 @@ func NewOracle(arb *Arbitrager) *Oracle {
 		slideDetect:    arb.config.Policy.Sample.SlideDetect,
 		buy_threshold:  arb.config.Policy.Trigger.BuyThreshold,
 		sell_threshold: arb.config.Policy.Trigger.SellThreshold,
+		chase_up: 		arb.config.Policy.Trade.ChaseUp,
 		epochMap:       make(map[string]*model.Epoch),
 		symbols:        arb.config.Policy.Symbols,
 	}
@@ -93,13 +95,19 @@ func (o *Oracle) Run(stopCh <-chan struct{}) {
 				// FIXME: firstly, detect downtrend, then detect uptrend
 				if float64(len(fallGroup))/float64(o.symbolsLen) >= o.sell_threshold {
 					oLog.Infof("trigger sell orders with fall:%v/all:%v, threshod %v", len(fallGroup), o.symbolsLen, o.sell_threshold)
-					o.arb.CreateOrders(&model.Order{Type: model.SELL_ORDER, Symbols: o.symbols})
+					sellGroup := append(fallGroup, otherGroup...)
+					o.arb.CreateOrders(&model.Order{Type: model.SELL_ORDER, Symbols: sellGroup})
 				} else if float64(len(riseGroup))/float64(o.symbolsLen) >= o.buy_threshold {
 					oLog.Infof("trigger buy orders with rise:%v/all:%v, threshod %v", len(riseGroup), o.symbolsLen, o.buy_threshold)
 					if len(otherGroup) == 0 {
 						oLog.Warnf("empty group for orders, do nothing!")
 					} else {
-						o.arb.CreateOrders(&model.Order{Type: model.BUY_ORDER, Symbols: otherGroup})
+						buyGroup := otherGroup
+						if o.chase_up {
+							// FIXME: riseGroup first
+							buyGroup = append(riseGroup, buyGroup...)
+						}	
+						o.arb.CreateOrders(&model.Order{Type: model.BUY_ORDER, Symbols: buyGroup})
 					}
 				} else {
 					oLog.Infof("not trigger sell/buy orders with fall:%v-rise:%v-all:%v, sell threshold:%v, buy threshold:%v", len(fallGroup), len(riseGroup), o.symbolsLen, o.sell_threshold, o.buy_threshold)
@@ -126,7 +134,7 @@ func (o *Oracle) isSlotMature() bool {
 func getPriceDirection(prevPrice, curPrice float64) (int32, string) {
 	colorGreen := "\033[32m"
 	colorRed := "\033[31m"
-	
+
 	if prevPrice < curPrice {
 		return model.RISE, colorGreen + "↗"
 	}

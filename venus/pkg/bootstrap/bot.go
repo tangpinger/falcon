@@ -78,7 +78,7 @@ func (b *Bot) waitForShutdown(stop <-chan struct{}) {
 	go func() {
 		<-stop
 		// TODO: shutdown all the comonents
-		log.Info("Bot shutdown")
+		log.Info("bot shutdown")
 	}()
 }
 
