@@ -30,6 +30,7 @@
         buy_threshold = 0.3
     # 定义交易费用，止盈止损点和仓位
     [policy.trade]
+        sell_on_fall = false
         chase_up = true
         one_by_one = false
         fee = 0.002

@@ -53,6 +53,7 @@ type Trigger struct {
 
 // Trade define parameters for trading
 type Trade struct {
+	SellOnFall	bool   `toml:"sell_on_fall"`
 	ChaseUp	    bool   `toml:"chase_up"`
 	OneByOne	bool   `toml:"one_by_one"`
 	Fee        float64 `toml:"fee"`

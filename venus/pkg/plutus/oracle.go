@@ -16,6 +16,7 @@ type Oracle struct {
 	symbols        []string
 	buy_threshold  float64
 	sell_threshold float64
+	sell_on_fail   bool
 	chase_up	   bool
 	epochMap       map[string]*model.Epoch
 	tick           uint64
@@ -29,6 +30,7 @@ func NewOracle(arb *Arbitrager) *Oracle {
 		slideDetect:    arb.config.Policy.Sample.SlideDetect,
 		buy_threshold:  arb.config.Policy.Trigger.BuyThreshold,
 		sell_threshold: arb.config.Policy.Trigger.SellThreshold,
+		sell_on_fail: 	arb.config.Policy.Trade.SellOnFall,
 		chase_up: 		arb.config.Policy.Trade.ChaseUp,
 		epochMap:       make(map[string]*model.Epoch),
 		symbols:        arb.config.Policy.Symbols,
@@ -95,8 +97,12 @@ func (o *Oracle) Run(stopCh <-chan struct{}) {
 				// FIXME: firstly, detect downtrend, then detect uptrend
 				if float64(len(fallGroup))/float64(o.symbolsLen) >= o.sell_threshold {
 					oLog.Infof("trigger sell orders with fall:%v/all:%v, threshod %v", len(fallGroup), o.symbolsLen, o.sell_threshold)
-					sellGroup := append(fallGroup, otherGroup...)
-					o.arb.CreateOrders(&model.Order{Type: model.SELL_ORDER, Symbols: sellGroup})
+					if o.sell_on_fail {
+						sellGroup := append(fallGroup, otherGroup...)
+						o.arb.CreateOrders(&model.Order{Type: model.SELL_ORDER, Symbols: sellGroup})
+					} else {
+						oLog.Warnf("do not sell because sell_on_fail is disabled!!!")
+					}
 				} else if float64(len(riseGroup))/float64(o.symbolsLen) >= o.buy_threshold {
 					oLog.Infof("trigger buy orders with rise:%v/all:%v, threshod %v", len(riseGroup), o.symbolsLen, o.buy_threshold)
 					if len(otherGroup) == 0 {
