@@ -6,6 +6,11 @@ import (
 	"github.com/adshao/go-binance/v2"
 )
 
+
+const (
+	TIME_FORMAT = "2006-01-02 15:04:05.000000"
+)
+
 var aLog = glog.RegisterScope("arbitrager", "arbitrager", 0)
 
 // Arbitrager defines components for arbitraging

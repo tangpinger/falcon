@@ -1,8 +1,9 @@
 package plutus
 
 import (
-	"context"
 	"fmt"
+	"time"
+	"context"
 	"strconv"
 	"sync"
 
@@ -16,6 +17,7 @@ var tLog = glog.RegisterScope("trader", "trader", 0)
 // Trader places orders according to events
 type Trader struct {
 	arb         *Arbitrager
+	span		*model.Span
 	stop_profit float64
 	stop_loss   float64
 	position    float64
@@ -30,6 +32,7 @@ type Trader struct {
 func NewTrader(arb *Arbitrager) *Trader {
 	t := &Trader{
 		arb:         arb,
+		span: arb.config.Policy.Trade.Span,
 		stop_profit: arb.config.Policy.Trade.StopProfit,
 		stop_loss:   arb.config.Policy.Trade.StopLoss,
 		position:    arb.config.Policy.Trade.Position,
@@ -53,6 +56,10 @@ func (t *Trader) Run(stopCh <-chan struct{}) {
 			return
 		case o := <-t.arb.tradeChannel:
 			tLog.Debug("order request: %v", o)
+			if !t.timeInSpan() {
+				tLog.Warn("out of timespan for trading, ignored")
+				break
+			}
 			if t.dryrun {
 				tLog.Info("ignore order request in dryrun mode")
 				break
@@ -64,6 +71,24 @@ func (t *Trader) Run(stopCh <-chan struct{}) {
 			}
 		}
 	}
+}
+
+// timeInSpan check if current time is within the timespan for trading
+func (t *Trader) timeInSpan() bool {
+	// China doesn't have daylight saving. It uses a fixed 8 hour offset from UTC.
+	// TODO: make timezone configurable
+	secondsEastOfUTC := int((8 * time.Hour).Seconds())
+	beijing := time.FixedZone("Beijing Time", secondsEastOfUTC)
+
+	now := time.Now()
+	begin := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, beijing)
+	start := begin.Add(t.span.From.Duration)
+	end := begin.Add(t.span.To.Duration)
+	
+	tLog.Debugf("timespan for trading is %v - %v", start.Format(TIME_FORMAT), end.Format(TIME_FORMAT))
+	// FIXME: should we adjust timezone before comparing time?
+	return start.Before(now) && end.After(now)
+
 }
 
 // processBuyOrder processes buy orders

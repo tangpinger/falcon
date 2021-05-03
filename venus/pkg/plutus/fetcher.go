@@ -71,7 +71,7 @@ func (f *Fetcher) queryPrice(symbol string, tick uint64) {
 		Tick: tick,
 		Symbol: symbol,
 		Price:  price,
-		Start:  time.Now().Format("2006-01-02 15:04:05.000000"),
+		Start:  time.Now().Format(TIME_FORMAT),
 	}
 
 	f.arb.UpdatePrice(sp)

@@ -23,7 +23,7 @@ type Exchange struct {
 type Policy struct {
 	Name      string     `toml:"name"`
 	Testnet   bool       `toml:"testnet"`
-	Dryrun	  bool       `toml:"dryrun"`
+	Dryrun    bool       `toml:"dryrun"`
 	Symbols   []string   `toml:"symbols"`
 	Sample    *Sample    `toml:"sample"`
 	Condition *Condition `toml:"condition"`
@@ -33,9 +33,9 @@ type Policy struct {
 
 // Sample defines configuration for sampling
 type Sample struct {
-	Interval duration `toml:"interval"`
-	Window   duration `toml:"window"`
-	SlideDetect bool  `toml:"slide_detect"`
+	Interval    duration `toml:"interval"`
+	Window      duration `toml:"window"`
+	SlideDetect bool     `toml:"slide_detect"`
 }
 
 // Condition defines the total trading amout of an exchange pair
@@ -53,15 +53,22 @@ type Trigger struct {
 
 // Trade define parameters for trading
 type Trade struct {
-	SellOnFall	bool   `toml:"sell_on_fall"`
-	ChaseUp	    bool   `toml:"chase_up"`
-	OneByOne	bool   `toml:"one_by_one"`
-	Fee        float64 `toml:"fee"`
-	StopLoss   float64 `toml:"stop_loss"`
-	StopProfit float64 `toml:"stop_profit"`
-	Position   float64 `toml:"position"`
-	USDTPerBuy float64 `toml:"usdt_per_buy"`
+	Span          *Span   `toml:"span"`
+	SellOnFall    bool    `toml:"sell_on_fall"`
+	ChaseUp       bool    `toml:"chase_up"`
+	OneByOne      bool    `toml:"one_by_one"`
+	Fee           float64 `toml:"fee"`
+	StopLoss      float64 `toml:"stop_loss"`
+	StopProfit    float64 `toml:"stop_profit"`
+	Position      float64 `toml:"position"`
+	USDTPerBuy    float64 `toml:"usdt_per_buy"`
 	MaxUSDTPerBuy float64 `toml:"max_usdt_per_buy"`
+}
+
+// Span defines time span for trading
+type Span struct {
+	From duration `toml:"from"`
+	To   duration `toml:"to"`
 }
 
 // Res defines the database configurations

@@ -39,6 +39,9 @@
         position = 1.0 # FULL
         usdt_per_buy = 12.0
         max_usdt_per_buy = 20.0
+        [policy.trade.span]
+            from = "00h10m00s"
+            to = "02h00m00s"
 
 # common resources
 [res]

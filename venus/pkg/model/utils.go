@@ -26,7 +26,7 @@ func VerifyConfig(conf *Config) error {
 	if len(conf.Policy.Symbols) == 0 {
 		return fmt.Errorf("symbols should not be empty")
 	}
-	
+
 	if conf.Policy.Trigger.BuyThreshold <= 0 || conf.Policy.Trigger.BuyThreshold > 1 {
 		return fmt.Errorf("invalid buy threshold, should be within (0,1]")
 	} 
@@ -36,7 +36,7 @@ func VerifyConfig(conf *Config) error {
 	}
 
 	if conf.Policy.Trade.Position <= 0 || conf.Policy.Trade.Position > 1 {
-		return fmt.Errorf("invalid position, should be within (0,1]")
+		return fmt.Errorf("invalid position %v, should be within (0,1]", conf.Policy.Trade.Position)
 	}
 
 	if conf.Policy.Trade.USDTPerBuy < 10 || conf.Policy.Trade.USDTPerBuy >= conf.Policy.Trade.MaxUSDTPerBuy {
