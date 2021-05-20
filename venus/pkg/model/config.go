@@ -4,6 +4,11 @@ import (
 	"time"
 )
 
+const (
+	REALTIME_PRICE = "realtime"
+	AVERAGE_PRICE = "average"
+)
+
 // Config defines the configuration
 type Config struct {
 	Exchange *Exchange `toml:"exchange"`
@@ -36,6 +41,7 @@ type Sample struct {
 	Interval    duration `toml:"interval"`
 	Window      duration `toml:"window"`
 	SlideDetect bool     `toml:"slide_detect"`
+	PriceMode	string	 `toml:"price_mode"`
 }
 
 // Condition defines the total trading amout of an exchange pair

@@ -20,6 +20,8 @@
         interval = "1m"
         window = "5m"
         slide_detect = true
+        # realtime or average
+        price_mode = "realtime"
     # 定义24h交易额的范围，主要关注小币种，单位为万。
     [policy.condition] 
         min = 200
