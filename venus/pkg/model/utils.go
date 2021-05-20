@@ -46,6 +46,14 @@ func VerifyConfig(conf *Config) error {
 	if conf.Policy.Trade.MaxUSDTPerBuy < 10 || conf.Policy.Trade.MaxUSDTPerBuy > 100 {
 		return fmt.Errorf("invalid max usdt per buy, should be within [10.0, 100.0]")
 	}
+
+	if conf.Policy.Sample.PriceMode != AVERAGE_PRICE && conf.Policy.Sample.PriceMode !=  REALTIME_PRICE {
+		priceModes := []string{
+			AVERAGE_PRICE,
+			REALTIME_PRICE,
+		}
+		return fmt.Errorf("invalid price mode %v, should be one of %+v", conf.Policy.Sample.PriceMode, priceModes)
+	} 
 	// TODO: more checks
 	return nil
 }
