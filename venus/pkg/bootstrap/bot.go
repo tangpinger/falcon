@@ -2,7 +2,6 @@ package bootstrap
 
 import (
 	"github.com/vjoke/falcon/pkg/log"
-	"github.com/vjoke/falcon/venus/pkg/model"
 	"github.com/vjoke/falcon/venus/pkg/plutus"
 	"github.com/vjoke/falcon/venus/pkg/server"
 )
@@ -11,11 +10,11 @@ import (
 type Bot struct {
 	// TODO: add other components
 	server server.Instance
-	arb    *plutus.Arbitrager
+	arb    plutus.Arbitrager
 }
 
 // NewBot creates a new bot instance based on the provided parameters
-func NewBot(args *PixiuArgs, initFuncs ...func(*Bot)) (*Bot, error) {
+func NewBot(builder plutus.ArbitragerBuilder, initFuncs ...func(*Bot)) (*Bot, error) {
 	b := &Bot{
 		server: server.New(),
 	}
@@ -24,7 +23,7 @@ func NewBot(args *PixiuArgs, initFuncs ...func(*Bot)) (*Bot, error) {
 		fn(b)
 	}
 
-	err := b.initArbitrager(args)
+	err := b.initArbitrager(builder)
 	if err != nil {
 		log.Errorf("failed to init arbitrager: %v", err)
 		return nil, err
@@ -33,17 +32,8 @@ func NewBot(args *PixiuArgs, initFuncs ...func(*Bot)) (*Bot, error) {
 	return b, nil
 }
 
-func (b *Bot) initArbitrager(args *PixiuArgs) error {
-	conf, err := model.LoadConfigFromFile(args.ConfigFile)
-	if err != nil {
-		return err
-	}
-
-	if err := model.VerifyConfig(conf); err != nil {
-		return err
-	}
-
-	arb, err := plutus.NewArbitrager(conf)
+func (b *Bot) initArbitrager(builder plutus.ArbitragerBuilder) error {
+	arb, err := builder.Build()
 	if err != nil {
 		return err
 	}
