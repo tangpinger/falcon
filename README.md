@@ -8,9 +8,9 @@ A quant trading tool designed for crypto-market
 $ export http_proxy=http://127.0.0.1:1087;export https_proxy=http://127.0.0.1:1087;
 ```
 
-2. input api keys in config file and run pixiu bot
+2. input api keys in config file and run pixiu
 ```
-$ cd venus/cmd/pixiu
+$ cd venus/cmd/plutus
 $ go build
-$ ./pixiu bot --config=../../../config/demo.toml --log_output_level="default:debug"
+$ ./plutus pixiu --config=../../../config/demo.toml --log_output_level="default:debug"
 ```

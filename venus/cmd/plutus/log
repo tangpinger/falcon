@@ -1,0 +1,62 @@
+2021-05-03T02:57:37.419684Z	info	FLAG: --config="../../../config/pixiu.toml"
+2021-05-03T02:57:37.419751Z	info	FLAG: --help="false"
+2021-05-03T02:57:37.419759Z	info	FLAG: --log_as_json="false"
+2021-05-03T02:57:37.419764Z	info	FLAG: --log_caller=""
+2021-05-03T02:57:37.419769Z	info	FLAG: --log_output_level="exchange:debug,fetcher:debug,oracle:debug,trader:debug"
+2021-05-03T02:57:37.419773Z	info	FLAG: --log_rotate=""
+2021-05-03T02:57:37.419778Z	info	FLAG: --log_rotate_max_age="30"
+2021-05-03T02:57:37.419783Z	info	FLAG: --log_rotate_max_backups="1000"
+2021-05-03T02:57:37.419787Z	info	FLAG: --log_rotate_max_size="104857600"
+2021-05-03T02:57:37.419791Z	info	FLAG: --log_stacktrace_level="default:none"
+2021-05-03T02:57:37.419797Z	info	FLAG: --log_target="[stdout]"
+&{Span:0xc0000399b0 SellOnFall:false ChaseUp:true OneByOne:false Fee:0.002 StopLoss:0.02 StopProfit:0.008 Position:1 USDTPerBuy:12 MaxUSDTPerBuy:20}
+&{From:10m0s To:2h0m0s}
+2021-05-03T02:57:37.420127Z	info	arbitrager	has 10 symbols, testnet: false, dryrun: true
+2021-05-03T02:57:38.384254Z	debug	exchange	ADAUSDT lot filter is {MaxQuantity:900000.00000000 MinQuantity:0.01000000 StepSize:0.01000000}
+2021-05-03T02:57:38.384308Z	debug	exchange	ADAUSDT price filter is {MaxPrice:1000.00000000 MinPrice:0.00010000 TickSize:0.00010000}
+2021-05-03T02:57:38.384330Z	debug	exchange	lot extra:&{fMaxQuantity:900000 fMinQuantity:0.01 fStepSize:0.01 fMinQuantityMultiply:100 nPrecision:2}
+2021-05-03T02:57:38.384339Z	debug	exchange	price extra:&{fMaxPrice:1000 fMinPrice:0.0001 fTickSize:0.0001 fMinPriceMultiply:10000 nPrecision:4}
+2021-05-03T02:57:38.384357Z	debug	exchange	ATOMUSDT lot filter is {MaxQuantity:90000.00000000 MinQuantity:0.00100000 StepSize:0.00100000}
+2021-05-03T02:57:38.384363Z	debug	exchange	ATOMUSDT price filter is {MaxPrice:10000.00000000 MinPrice:0.00100000 TickSize:0.00100000}
+2021-05-03T02:57:38.384370Z	debug	exchange	lot extra:&{fMaxQuantity:90000 fMinQuantity:0.001 fStepSize:0.001 fMinQuantityMultiply:1000 nPrecision:3}
+2021-05-03T02:57:38.384377Z	debug	exchange	price extra:&{fMaxPrice:10000 fMinPrice:0.001 fTickSize:0.001 fMinPriceMultiply:1000 nPrecision:3}
+2021-05-03T02:57:38.384384Z	debug	exchange	UNIUSDT lot filter is {MaxQuantity:90000.00000000 MinQuantity:0.00100000 StepSize:0.00100000}
+2021-05-03T02:57:38.384390Z	debug	exchange	UNIUSDT price filter is {MaxPrice:10000.00000000 MinPrice:0.00100000 TickSize:0.00100000}
+2021-05-03T02:57:38.384397Z	debug	exchange	lot extra:&{fMaxQuantity:90000 fMinQuantity:0.001 fStepSize:0.001 fMinQuantityMultiply:1000 nPrecision:3}
+2021-05-03T02:57:38.384403Z	debug	exchange	price extra:&{fMaxPrice:10000 fMinPrice:0.001 fTickSize:0.001 fMinPriceMultiply:1000 nPrecision:3}
+2021-05-03T02:57:38.384411Z	debug	exchange	XRPUSDT lot filter is {MaxQuantity:900000.00000000 MinQuantity:0.01000000 StepSize:0.01000000}
+2021-05-03T02:57:38.384417Z	debug	exchange	XRPUSDT price filter is {MaxPrice:1000.00000000 MinPrice:0.00010000 TickSize:0.00010000}
+2021-05-03T02:57:38.384423Z	debug	exchange	lot extra:&{fMaxQuantity:900000 fMinQuantity:0.01 fStepSize:0.01 fMinQuantityMultiply:100 nPrecision:2}
+2021-05-03T02:57:38.384430Z	debug	exchange	price extra:&{fMaxPrice:1000 fMinPrice:0.0001 fTickSize:0.0001 fMinPriceMultiply:10000 nPrecision:4}
+2021-05-03T02:57:38.384437Z	debug	exchange	MATICUSDT lot filter is {MaxQuantity:9000000.00000000 MinQuantity:0.10000000 StepSize:0.10000000}
+2021-05-03T02:57:38.384444Z	debug	exchange	MATICUSDT price filter is {MaxPrice:1000.00000000 MinPrice:0.00001000 TickSize:0.00001000}
+2021-05-03T02:57:38.384451Z	debug	exchange	lot extra:&{fMaxQuantity:9e+06 fMinQuantity:0.1 fStepSize:0.1 fMinQuantityMultiply:10 nPrecision:1}
+2021-05-03T02:57:38.384458Z	debug	exchange	price extra:&{fMaxPrice:1000 fMinPrice:1e-05 fTickSize:1e-05 fMinPriceMultiply:99999.99999999999 nPrecision:5}
+2021-05-03T02:57:38.384465Z	debug	exchange	DOTUSDT lot filter is {MaxQuantity:90000.00000000 MinQuantity:0.00100000 StepSize:0.00100000}
+2021-05-03T02:57:38.384471Z	debug	exchange	DOTUSDT price filter is {MaxPrice:10000.00000000 MinPrice:0.00100000 TickSize:0.00100000}
+2021-05-03T02:57:38.384500Z	debug	exchange	lot extra:&{fMaxQuantity:90000 fMinQuantity:0.001 fStepSize:0.001 fMinQuantityMultiply:1000 nPrecision:3}
+2021-05-03T02:57:38.384507Z	debug	exchange	price extra:&{fMaxPrice:10000 fMinPrice:0.001 fTickSize:0.001 fMinPriceMultiply:1000 nPrecision:3}
+2021-05-03T02:57:38.384514Z	debug	exchange	ETCUSDT lot filter is {MaxQuantity:90000.00000000 MinQuantity:0.00100000 StepSize:0.00100000}
+2021-05-03T02:57:38.384520Z	debug	exchange	ETCUSDT price filter is {MaxPrice:10000.00000000 MinPrice:0.00100000 TickSize:0.00100000}
+2021-05-03T02:57:38.384526Z	debug	exchange	lot extra:&{fMaxQuantity:90000 fMinQuantity:0.001 fStepSize:0.001 fMinQuantityMultiply:1000 nPrecision:3}
+2021-05-03T02:57:38.384533Z	debug	exchange	price extra:&{fMaxPrice:10000 fMinPrice:0.001 fTickSize:0.001 fMinPriceMultiply:1000 nPrecision:3}
+2021-05-03T02:57:38.384539Z	debug	exchange	CRVUSDT lot filter is {MaxQuantity:90000.00000000 MinQuantity:0.00100000 StepSize:0.00100000}
+2021-05-03T02:57:38.384545Z	debug	exchange	CRVUSDT price filter is {MaxPrice:10000.00000000 MinPrice:0.00100000 TickSize:0.00100000}
+2021-05-03T02:57:38.384551Z	debug	exchange	lot extra:&{fMaxQuantity:90000 fMinQuantity:0.001 fStepSize:0.001 fMinQuantityMultiply:1000 nPrecision:3}
+2021-05-03T02:57:38.384557Z	debug	exchange	price extra:&{fMaxPrice:10000 fMinPrice:0.001 fTickSize:0.001 fMinPriceMultiply:1000 nPrecision:3}
+2021-05-03T02:57:38.384565Z	debug	exchange	LINKUSDT lot filter is {MaxQuantity:90000.00000000 MinQuantity:0.00100000 StepSize:0.00100000}
+2021-05-03T02:57:38.384570Z	debug	exchange	LINKUSDT price filter is {MaxPrice:10000.00000000 MinPrice:0.00100000 TickSize:0.00100000}
+2021-05-03T02:57:38.384576Z	debug	exchange	lot extra:&{fMaxQuantity:90000 fMinQuantity:0.001 fStepSize:0.001 fMinQuantityMultiply:1000 nPrecision:3}
+2021-05-03T02:57:38.384583Z	debug	exchange	price extra:&{fMaxPrice:10000 fMinPrice:0.001 fTickSize:0.001 fMinPriceMultiply:1000 nPrecision:3}
+2021-05-03T02:57:38.384592Z	debug	exchange	DOGEUSDT lot filter is {MaxQuantity:9000000.00000000 MinQuantity:0.10000000 StepSize:0.10000000}
+2021-05-03T02:57:38.384598Z	debug	exchange	DOGEUSDT price filter is {MaxPrice:1000.00000000 MinPrice:0.00001000 TickSize:0.00001000}
+2021-05-03T02:57:38.384605Z	debug	exchange	lot extra:&{fMaxQuantity:9e+06 fMinQuantity:0.1 fStepSize:0.1 fMinQuantityMultiply:10 nPrecision:1}
+2021-05-03T02:57:38.384612Z	debug	exchange	price extra:&{fMaxPrice:1000 fMinPrice:1e-05 fTickSize:1e-05 fMinPriceMultiply:99999.99999999999 nPrecision:5}
+2021-05-03T02:57:38.384629Z	info	start the bot ...
+2021-05-03T02:57:38.384635Z	info	start arbitrager ...
+2021-05-03T02:57:38.384656Z	info	bot started
+2021-05-03T02:57:38.384709Z	info	oracle	worker is running
+2021-05-03T02:57:38.384762Z	info	trader	worker is running
+2021-05-03T02:57:38.384799Z	info	fetcher	worker is running
+2021-05-03T02:57:38.622409Z	info	account	&{MakerCommission:10 TakerCommission:10 BuyerCommission:0 SellerCommission:0 CanTrade:true CanWithdraw:true CanDeposit:true Balances:[{Asset:EOS Free:0.01690000 Locked:0.00000000} {Asset:USDT Free:39.58249821 Locked:0.00000000} {Asset:LINK Free:0.00229600 Locked:0.00000000} {Asset:ETC Free:0.00748200 Locked:0.26500000} {Asset:DASH Free:0.00000740 Locked:0.00000000} {Asset:XRP Free:0.01518000 Locked:0.00000000} {Asset:ADA Free:0.00881000 Locked:9.02000000} {Asset:XLM Free:0.14060000 Locked:0.00000000} {Asset:MATIC Free:0.81100000 Locked:0.00000000} {Asset:ATOM Free:0.00159500 Locked:0.00000000} {Asset:DOGE Free:0.49170000 Locked:0.00000000} {Asset:DOT Free:0.00564600 Locked:0.00000000} {Asset:CRV Free:0.00188500 Locked:3.58600000} {Asset:UNI Free:0.00368200 Locked:0.00000000} {Asset:CAKE Free:0.00150600 Locked:0.00000000}]}
+2021-05-03T02:57:40.676977Z	info	oracle	worker is stopped
